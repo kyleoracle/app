@@ -25,7 +25,7 @@ push-release:
         working-dir: /pipeline/source
         ports: $PORT
         env: PORT=$PORT
-        cmd: sh target/bin/start
+        cmd: java -jar target/app.jar
 
 #Deploy our container from the Docker Hub to Kubernetes
 deploy-to-cluster:
