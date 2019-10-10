@@ -1,26 +1,26 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: twitter-feed-v1
+  name: myapp
   labels:
     commit: ${WERCKER_GIT_COMMIT}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: twitter-feed
+      app: myapp
   template:
     metadata:
       labels:
-        app: twitter-feed
+        app: myapp
         commit: ${WERCKER_GIT_COMMIT}
     spec:
       containers:
-      - name: twitter-feed
+      - name: myapp
         image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         ports:
-        - name: twitter-feed
+        - name: myapp
           containerPort: ${PORT}
           protocol: TCP
       imagePullSecrets:
@@ -29,15 +29,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: twitter-feed
+  name: myapp
   labels:
-    app: twitter-feed
+    app: myapp
     commit: ${WERCKER_GIT_COMMIT}
 spec:
   ports:
   - port: 30000
     targetPort: ${PORT}
   selector:
-    app: twitter-feed
+    app: myapp
   type: ClusterIP
 ---
