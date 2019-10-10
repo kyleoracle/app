@@ -39,5 +39,5 @@ spec:
     targetPort: ${PORT}
   selector:
     app: myapp
-  type: ClusterIP
+  type: NodePort
 ---
